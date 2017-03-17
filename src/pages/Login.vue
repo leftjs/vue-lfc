@@ -43,25 +43,52 @@
         if(this.isClerk && this.isLogin) {
           // 业务员登录
           request().post("/token/clerk", {
-            clerkId: this.form.username,
-            password: this.form.password
-          }).then(() => {
-            console.log('success')
+            clerk: {
+              clerkId: this.form.username,
+              password: this.form.password
+            }
+          }).then(res => {
+            let tokenRoot = res.data.tokenRoot
+            localStorage.setItem('token', tokenRoot.token)
+            localStorage.setItem('expiredAt', parseInt(tokenRoot.expiredAt))
+            this.$router.push('/home')
           }).catch((err) => {
-            console.error(err)
+            this.$message({
+              type: 'error',
+              message: err.response.data.error.message
+            })
           })
         }else if (this.isClerk && !this.isLogin) {
+          if (this.form.password !== this.form.confirm) {
+            this.$message({
+              type: 'error',
+              message: '两次输入的密码不一样'
+            })
+            return
+          }
           // 业务员注册
           request().post("/clerks", {
             clerk: {
-//              clerkId: this.form.username,
-              clerkId: "张加胜1",
+              clerkId: this.form.username,
               password: this.form.password
             }
           }).then(() => {
-            console.log('success')
+            this.$message({
+              type: 'success',
+              message: `${this.form.username} 业务员注册成功`
+            })
+            this.isLogin = true
           }).catch(err => {
-            console.error(err)
+            let errorMessage = err.response.data.error.message;
+            if (/INDEX.*CLERK_ID/.test(errorMessage)) {
+              errorMessage = '业务员工号已存在'
+            }else {
+              errorMessage = '未知错误'
+            }
+            this.$message({
+              type: 'error',
+              message: errorMessage
+            })
           })
         }
       }

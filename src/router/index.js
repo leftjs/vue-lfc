@@ -1,11 +1,12 @@
 import Vue from 'vue'
+import moment from 'moment'
 import Router from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Home from '@/pages/Home.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -18,3 +19,16 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    return next(true)
+  }
+  let expiredAt = localStorage.getItem('expiredAt')
+  let token = localStorage.get('token')
+  if (expiredAt) {
+
+  }
+})
+
+export default router
