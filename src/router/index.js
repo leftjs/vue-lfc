@@ -25,10 +25,17 @@ router.beforeEach((to, from, next) => {
     return next(true)
   }
   let expiredAt = localStorage.getItem('expiredAt')
-  let token = localStorage.get('token')
-  if (expiredAt) {
-
+  let token = localStorage.getItem('token')
+  if (!!token && !!expiredAt && moment().valueOf() < +expiredAt) {
+    // 没有过期
+    return next(true)
+  }else {
+    // 过期了
+    localStorage.removeItem('expiredAt')
+    localStorage.removeItem('token')
+    return next('/')
   }
+  return next(true)
 })
 
 export default router

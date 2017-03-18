@@ -51,6 +51,7 @@
             let tokenRoot = res.data.tokenRoot
             localStorage.setItem('token', tokenRoot.token)
             localStorage.setItem('expiredAt', parseInt(tokenRoot.expiredAt))
+            localStorage.setItem('clerkId', this.form.username)
             this.$router.push('/home')
           }).catch((err) => {
             this.$message({

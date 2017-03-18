@@ -5,7 +5,11 @@ import axios from 'axios'
 import _ from 'lodash'
 import X2JS from './x2js'
 import router from '@/router'
-const x2js = new X2JS()
+const x2js = new X2JS({
+  arrayAccessFormPaths : [
+    "INSURANCES.INSURANCE"
+  ]
+})
 
 
 export default function () {
