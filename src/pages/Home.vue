@@ -372,14 +372,15 @@
   }
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
 
+<style scope lang="scss" rel="stylesheet/scss">
   .pane_container {
     padding: 0 20px;
     text-align: left;
   }
-  .insured_container {
-  }
+</style>
+
+<style lang="scss" rel="stylesheet/scss">
   .ellipsis_column {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -389,9 +390,10 @@
     width: 34px;
     border-radius: 17px;
   }
-</style>
-
-<style lang="scss" rel="stylesheet/scss">
+  .pane_container {
+    padding: 0 20px;
+    text-align: left;
+  }
   .expand_insurance_form {
     font-size: 0;
     label {

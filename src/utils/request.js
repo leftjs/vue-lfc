@@ -7,7 +7,8 @@ import X2JS from './x2js'
 import router from '@/router'
 const x2js = new X2JS({
   arrayAccessFormPaths : [
-    "INSURANCES.INSURANCE"
+    "INSURANCES.INSURANCE",
+    "CLERK_LIST.CLERK"
   ]
 })
 

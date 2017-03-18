@@ -3,6 +3,7 @@ import moment from 'moment'
 import Router from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Home from '@/pages/Home.vue'
+import Admin from '@/pages/Admin.vue'
 
 Vue.use(Router)
 
@@ -16,6 +17,10 @@ const router = new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    }, {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin
     }
   ]
 })

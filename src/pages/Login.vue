@@ -16,7 +16,7 @@
     </div>
     <div class="btn_group">
       <a @click="isLogin = !isLogin">{{ isLogin ? '没有账号?注册': '已有账号?登录' }}</a>
-      <a @click="isClerk = !isClerk" >{{ isClerk ? '管理员登录' : '业务员登录' }}</a>
+      <a @click="isClerk = !isClerk" >{{ isClerk ? '管理员' : '业务员' }}</a>
     </div>
   </div>
 </template>
@@ -34,12 +34,19 @@
           password: '',
           confirm: ''
         },
-        isClerk: true,
+        isClerk: false,
         isLogin: false
       }
     },
     methods: {
       submit() {
+        if(!this.form.username || !this.form.password) {
+          this.$message({
+            type: 'error',
+            message: '用户名或密码不能为空'
+          })
+          return
+        }
         if(this.isClerk && this.isLogin) {
           // 业务员登录
           request().post("/token/clerk", {
@@ -89,6 +96,59 @@
             this.$message({
               type: 'error',
               message: errorMessage
+            })
+          })
+        } else if (!this.isClerk && !this.isLogin) {
+          // 管理员注册
+          if (this.form.password !== this.form.confirm) {
+            this.$message({
+              type: 'error',
+              message: '两次输入的密码不一样'
+            })
+            return
+          }
+
+          request().post('/admins', {
+            admin: {
+              username: this.form.username,
+              password: this.form.password
+            }
+          }).then(res => {
+            this.$message({
+              type: 'success',
+              message: `${this.form.username} 管理员注册成功`
+            })
+            this.isLogin = true
+
+          }).catch(err => {
+            let errorMessage = err.response.data.error.message;
+            if (/INDEX.*USERNAME/.test(errorMessage)) {
+              errorMessage = '管理员用户名已存在'
+            }else {
+              errorMessage = '未知错误'
+            }
+            this.$message({
+              type: 'error',
+              message: errorMessage
+            })
+          })
+        } else {
+          // 管理员登录
+          request().post("/token/admin", {
+            admin: {
+              username: this.form.username,
+              password: this.form.password
+            }
+          }).then(res => {
+            let tokenRoot = res.data.tokenRoot
+            localStorage.setItem('token', tokenRoot.token)
+            localStorage.setItem('expiredAt', parseInt(tokenRoot.expiredAt))
+            localStorage.setItem('adminId', this.form.username)
+            this.$router.push('/admin')
+          }).catch((err) => {
+            this.$message({
+              type: 'error',
+              message: err.response.data.error.message
             })
           })
         }
