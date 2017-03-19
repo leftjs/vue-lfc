@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header :title="tabs[activeTab]">
-      <img src="static/avatar.png" slot="right" class="avatar" @click="sheetVisible = !sheetVisible">
+      <img src="~@/assets/avatar.png" slot="right" class="avatar" @click="sheetVisible = !sheetVisible">
     </mt-header>
     <mt-actionsheet
       :actions="actions"
