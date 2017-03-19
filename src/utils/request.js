@@ -57,7 +57,7 @@ export default function () {
   instance.interceptors.response.use(function (response){
     return response
   }, function(error){
-    if (error.message == "Network Error") {
+    if (error.message == "Network Error" || error.message.indexOf('401') > -1) {
       localStorage.removeItem('token')
       localStorage.removeItem('expiredAt')
       router.replace('/')
@@ -68,6 +68,3 @@ export default function () {
   return instance
 
 }
-
-
-

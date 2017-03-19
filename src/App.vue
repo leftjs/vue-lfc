@@ -22,6 +22,7 @@
     text-align: center;
     width: 100vw;
     height: 100vh;
+    font-size: 16px;
   }
 
   /*更改element的样式*/
@@ -30,6 +31,10 @@
   }
   .el-table__expand-icon{
     cursor: default !important;
+  }
+
+  .el-radio-group {
+    line-height: 2 !important;
   }
 
 

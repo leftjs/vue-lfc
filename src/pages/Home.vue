@@ -296,7 +296,7 @@
           addInsurance: '添改保单',
           manageInsurance: '保单管理'
         },
-        activeTab: 'manageInsurance',
+        activeTab: 'addInsurance',
 
         // actionsheet
         sheetVisible: false,

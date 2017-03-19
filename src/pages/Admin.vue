@@ -240,7 +240,7 @@
           manageInsurance: '保单管理'
 
         },
-        activeTab: 'manageInsurance',
+        activeTab: 'manageAdmin',
 
         // actionsheet
         sheetVisible: false,

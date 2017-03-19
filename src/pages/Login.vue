@@ -34,8 +34,8 @@
           password: '',
           confirm: ''
         },
-        isClerk: false,
-        isLogin: false
+        isClerk: true,
+        isLogin: true
       }
     },
     methods: {
@@ -61,9 +61,19 @@
             localStorage.setItem('clerkId', this.form.username)
             this.$router.push('/home')
           }).catch((err) => {
+            let error = err.response.data.error
+            if(!error) {
+              this.$message({
+                type: 'warning',
+                message: '正在清理缓存，请重新提交'
+              })
+              localStorage.clear()
+              return
+            }
+            let errorMessage = error.message;
             this.$message({
               type: 'error',
-              message: err.response.data.error.message
+              message: errorMessage
             })
           })
         }else if (this.isClerk && !this.isLogin) {
@@ -87,7 +97,16 @@
             })
             this.isLogin = true
           }).catch(err => {
-            let errorMessage = err.response.data.error.message;
+            let error = err.response.data.error
+            if(!error) {
+              this.$message({
+                type: 'warning',
+                message: '正在清理缓存，请重新提交'
+              })
+              localStorage.clear()
+              return
+            }
+            let errorMessage = error.message;
             if (/INDEX.*CLERK_ID/.test(errorMessage)) {
               errorMessage = '业务员工号已存在'
             }else {
@@ -121,7 +140,17 @@
             this.isLogin = true
 
           }).catch(err => {
-            let errorMessage = err.response.data.error.message;
+            let error = err.response.data.error
+            if(!error) {
+              this.$message({
+                type: 'warning',
+                message: '正在清理缓存，请重新提交'
+              })
+              localStorage.clear()
+
+              return
+            }
+            let errorMessage = error.message;
             if (/INDEX.*USERNAME/.test(errorMessage)) {
               errorMessage = '管理员用户名已存在'
             }else {
@@ -146,9 +175,19 @@
             localStorage.setItem('adminId', this.form.username)
             this.$router.push('/admin')
           }).catch((err) => {
+            let error = err.response.data.error
+            if(!error) {
+              this.$message({
+                type: 'warning',
+                message: '正在清理缓存，请重新提交'
+              })
+              localStorage.clear()
+              return
+            }
+            let errorMessage = error.message;
             this.$message({
               type: 'error',
-              message: err.response.data.error.message
+              message: errorMessage
             })
           })
         }
