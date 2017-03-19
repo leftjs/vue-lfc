@@ -135,7 +135,6 @@
 
     methods: {
       addInsuranceSubmit() {
-
         this.$refs.addInsuranceForm.validate(valid => {
           if (valid) {
             let data = this.addInsuranceForm
@@ -218,11 +217,9 @@
                 this.fetchInsurances(this.insurances.currentPage, this.insurances.sizePerPage)
 
               }).catch(err => {
-
+                console.error(err)
               })
             }
-
-
           }else {
             console.log('error submit')
             return false
@@ -304,7 +301,7 @@
         // actionsheet
         sheetVisible: false,
         actions: [{
-          name: '注销',
+          name: `注销业务员: ${localStorage.getItem('clerkId')}?`,
           method: () => {
             this.logout()
           }
@@ -389,10 +386,6 @@
   .avatar {
     width: 34px;
     border-radius: 17px;
-  }
-  .pane_container {
-    padding: 0 20px;
-    text-align: left;
   }
   .expand_insurance_form {
     font-size: 0;
