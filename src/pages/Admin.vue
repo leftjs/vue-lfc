@@ -137,7 +137,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="info.baodanNo" label="保单号"></el-table-column>
-          <el-table-column prop="info.holderName" width="80" label="投保人">
+          <el-table-column prop="info.holderName" width="90" label="投保人">
             <template scope="scope">
               <span class="ellipsis_column">{{scope.row.info.holderName}}</span>
             </template>
