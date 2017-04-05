@@ -390,9 +390,16 @@
           this.fetchClerks(this.clerks.currentPage, this.clerks.sizePerPage)
 
         }).catch(err => {
+          let error = err.response.data.error
+          let errorMessage = error.message;
+          if (/ConstraintViolationException/.test(errorMessage)) {
+            errorMessage = '请先删除该业务员所录入保单'
+          }else {
+            errorMessage = '业务员删除失败'
+          }
           this.$notify({
             title: '失败',
-            message: '业务员删除失败',
+            message: errorMessage,
             type: 'error',
             duration: 2000
           })
