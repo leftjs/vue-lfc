@@ -8,10 +8,10 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     // assetsSubDirectory: 'static',
     assetsSubDirectory: '',
-    assetsPublicPath: '/lfc/',
+    assetsPublicPath: '/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
-    // Surge or Netlify already gzip all static assets for you.
+    // Surge or Netlify already gzip all static assguit ets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
