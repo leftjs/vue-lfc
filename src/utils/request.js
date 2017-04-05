@@ -41,7 +41,7 @@ export default function () {
 
 
   let instance = axios.create({
-    baseURL: 'http://localhost:8080/api/',
+    baseURL: 'http://localhost:8080/lfc/api/',
     timeout: 1000,
     headers: headers,
     transformRequest: [function(data) {

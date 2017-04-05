@@ -107,7 +107,7 @@
               return
             }
             let errorMessage = error.message;
-            if (/INDEX.*CLERK_ID/.test(errorMessage)) {
+            if (/INDEX.*CLERK_ID/.test(errorMessage) || /ConstraintViolationException/.test(errorMessage)) {
               errorMessage = '业务员工号已存在'
             }else {
               errorMessage = '未知错误'
@@ -151,7 +151,7 @@
               return
             }
             let errorMessage = error.message;
-            if (/INDEX.*USERNAME/.test(errorMessage)) {
+            if (/INDEX.*USERNAME/.test(errorMessage) || /ConstraintViolationException/.test(errorMessage)) {
               errorMessage = '管理员用户名已存在'
             }else {
               errorMessage = '未知错误'
